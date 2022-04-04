@@ -1,4 +1,8 @@
-var path = require("path")
+const path = require('path');
+
+function resolve(dir) {
+  return path.join(__dirname, dir);
+}
 
 module.exports = {
   title: 'cesium学习笔记',
@@ -10,7 +14,7 @@ module.exports = {
     lineNumbers: true // 代码块显示行号
   },
   head: [
-    ['script', { src: 'https://cesium.com/downloads/cesiumjs/releases/1.57/Build/Cesium/Cesium.js'}]
+    ['script', { src: 'https://cesium.com/downloads/cesiumjs/releases/1.57/Build/Cesium/Cesium.js' }]
   ],
   plugins: {
     'demo-container': true,
