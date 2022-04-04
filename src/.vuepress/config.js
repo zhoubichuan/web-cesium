@@ -1,3 +1,5 @@
+var path = require("path")
+
 module.exports = {
   title: 'cesium学习笔记',
   description: '风浪没平息 我宣告奔跑的意义',
@@ -7,6 +9,9 @@ module.exports = {
   markdown: {
     lineNumbers: true // 代码块显示行号
   },
+  head: [
+    ['script', { src: 'https://cesium.com/downloads/cesiumjs/releases/1.57/Build/Cesium/Cesium.js'}]
+  ],
   plugins: {
     'demo-container': true,
     // 名称：@vuepress/plugin-pwa 网页内容有更新的时候有刷新按钮。可以把网页保存到桌面，当一个app一样
@@ -47,5 +52,5 @@ module.exports = {
     nav: require('./nav.js'),
     sidebar: require('./sidebar.js'),
     searchMaxSuggestoins: 10
-  },
+  }
 }
