@@ -33,4 +33,8 @@ jobs:
           # 打包后的文件部署到哪个分支上
           BRANCH: gh-pages
           # 打包后的文件在哪里
+<<<<<<< HEAD
           FOLDER: web-cesium
+=======
+          FOLDER: dist
+>>>>>>> bf794a49cc626d04f35cfeb5b6a9f3d4e5aff517
