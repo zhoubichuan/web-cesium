@@ -14,7 +14,11 @@ module.exports = {
     lineNumbers: true // 代码块显示行号
   },
   head: [
-    ['script', { src: 'https://cesium.com/downloads/cesiumjs/releases/1.57/Build/Cesium/Cesium.js' }]
+    ['script', { src: '/Build/Cesium/Cesium.js' }],
+    ['script', { src: '/Source/JSON/building.js' }],
+    ['script', { src: '/plugin/turf.min.js' }],
+    ['script', { src: '/plugin/PrimitivePoints.js' }],
+    ['script', { src: '/plugin/TerrainToolCopy.js' }]
   ],
   plugins: {
     'demo-container': true,
