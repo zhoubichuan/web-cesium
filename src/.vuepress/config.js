@@ -21,6 +21,15 @@ module.exports = {
     ['script', { src: '/plugin/TerrainToolCopy.js' }]
   ],
   plugins: {
+    'vuepress-plugin-anchor-toc': {
+      showDepth: 1,
+      customClass: 'your-customClass',
+      ignore: [
+        '/',
+        '/api/'
+        // more...
+      ]
+    },
     'demo-container': true,
     // 名称：@vuepress/plugin-pwa 网页内容有更新的时候有刷新按钮。可以把网页保存到桌面，当一个app一样
     '@vuepress/pwa': {

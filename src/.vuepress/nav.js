@@ -1,16 +1,16 @@
 const nav = [{
-    text: '基础知识',
+    text: '初级知识',
     items: [
         {
-            text: '一.基础案例（1）',
+            text: '一.基础知识',
             link: '/base/engine/1.index'
         },
         {
-            text: '二..基础案例（2）',
+            text: '二.基础案例',
             link: '/base/project/1.index',
         },
         {
-            text: '三..基础案例（3）',
+            text: '三.综合案例',
             link: '/base/vue2.x/1.index'
         },
         // {

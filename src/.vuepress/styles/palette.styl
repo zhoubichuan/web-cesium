@@ -1,22 +1,21 @@
 .content:not(.custom) {
-    max-width: 100%!important;
+    max-width: 80%!important;
     margin: 0 auto;
     padding: 2rem 2.5rem;
+    margin-left:0;
 }
 $sidebarWidth = 18rem
 .theme-default-content:not(.custom) {
-    max-width: 100%!important;
+    max-width: 80%!important;
     margin: 0 auto;
     padding: 2rem 2.5rem;
+    margin-left:0;
 }
 .page-edit, .page-nav{
   max-width: initial;
 }
-.map {
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-}
 @import('/Build/Cesium/Widgets/widgets.css')
+.map{
+  width:100%;
+  height: 400px
+}
