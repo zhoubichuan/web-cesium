@@ -18,7 +18,8 @@ module.exports = {
     ['script', { src: '/Source/JSON/building.js' }],
     ['script', { src: '/plugin/turf.min.js' }],
     ['script', { src: '/plugin/PrimitivePoints.js' }],
-    ['script', { src: '/plugin/TerrainToolCopy.js' }]
+    ['script', { src: '/plugin/TerrainToolCopy.js' }],
+    ['style', { href: '/Build/Cesium/Widgets/widgets.css' }]
   ],
   plugins: {
     'vuepress-plugin-anchor-toc': {
