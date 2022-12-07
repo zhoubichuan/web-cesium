@@ -8,12 +8,12 @@ const sidebar = {
         '5.animation',
         '6.tile',
         '7.style',
-        '8.page',
-        '9.module',
-        '10.skill',
-        '11.mock',
-        '12.optimization',
-        '13.deploy'
+        // '8.page',
+        // '9.module',
+        // '10.skill',
+        // '11.mock',
+        // '12.optimization',
+        // '13.deploy'
     ],
     '/base/project/': [
         '1.index',
@@ -25,11 +25,11 @@ const sidebar = {
         '6.configurePrem',
         '7.internationalization',
         '8.errorCollection',
-        '9.optimize',
-        '10.server',
-        '11.pwa',
-        '12.upload',
-        '13.video'
+        // '9.optimize',
+        // '10.server',
+        // '11.pwa',
+        // '12.upload',
+        // '13.video'
     ],
     '/base/vue2.x/': [
         '1.index',

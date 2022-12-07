@@ -9,10 +9,10 @@ const nav = [{
             text: '二.基础案例',
             link: '/base/project/1.index',
         },
-        {
-            text: '三.综合案例',
-            link: '/base/vue2.x/1.index'
-        },
+        // {
+        //     text: '三.综合案例',
+        //     link: '/base/vue2.x/1.index'
+        // },
         // {
         //     text: '四.权限',
         //     link: '/base/vue3.x/1.index'
