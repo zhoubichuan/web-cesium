@@ -1,6 +1,6 @@
-# web-openlayers
+# web-cesium
 
-基本 openlayers 二次封装的业务组件库。
+基本 cesium 二次封装的业务组件库。
 
 ## 1.使用方法
 
@@ -9,7 +9,7 @@
 以 yarn 为例
 
 ```sh
-yarn add web-openlayers
+yarn add web-cesium
 ```
 
 ## 2.打包方式
