@@ -28,7 +28,7 @@
     "clean-webpack-plugin": "4.0.0",
     "less": "3.0.2",
     "less-loader": "4.1.0",
-    "node-sass": "4.14.1",
+    "node-sass": "7.0.0",
     "sass-loader": "7.3.1",
     "vuepress-plugin-boxx": "0.0.7",
     "vuepress-plugin-dynamic-title": "1.0.0",
