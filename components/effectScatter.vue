@@ -1,213 +1,117 @@
 <template>
-  <div ref="effectScatter" style="height: 100%"></div>
+  <div class="map" ref="cesiumContainer"></div>
 </template>
-  
-  <script>
-const labelRight = {
-  position: "right",
-};
+
+<script>
 export default {
-  name: "WebEffectScatter",
-  props: {
-    config: {
-      type: Function,
-    },
-    data: {
-      type: [Array, Object],
-      default: () => [],
-    },
-    styles: {
-      type: String,
-      default: "height: 100%;width:800px;",
-    },
-    title: {
-      type: [Array, Object],
-      default: () => ({
-        text: "统计数据",
-        subtext: "单位：个",
-      }),
-    },
-    tooltip: {
-      type: [Array, Object],
-      default: () => [
-        {
-          trigger: "axis",
-          axisPointer: {
-            type: "shadow",
-          },
-        },
-      ],
-    },
-    grid: {
-      type: [Array, Object],
-      default: () => [
-        {
-          top: "250",
-          bottom: 30,
-        },
-      ],
-    },
-    legend: {
-      type: [Array, Object],
-      default: () => [
-        {
-          orient: "vertical",
-          left: "0%",
-          top: "0%",
-          bottom: "center",
-          data: ["<10w", "10w-50w", "50w-100w", "100w-500w", ">500w"],
-        },
-      ],
-    },
-    xAxis: {
-      type: [Array, Object],
-      default: () => [
-        {
-          type: "value",
-          position: "top",
-          splitLine: {
-            lineStyle: {
-              type: "dashed",
-            },
-          },
-        },
-      ],
-    },
-    yAxis: {
-      type: [Array, Object],
-      default: () => [
-        {
-          type: "category",
-          axisLine: { show: false },
-          axisLabel: { show: false },
-          axisTick: { show: false },
-          splitLine: { show: false },
-          data: [
-            "ten",
-            "nine",
-            "eight",
-            "seven",
-            "six",
-            "five",
-            "four",
-            "three",
-            "two",
-            "one",
-          ],
-        },
-      ],
-    },
-    series: {
-      type: [Array, Object],
-      default: () => [
-        {
-          name: "Cost",
-          type: "effectScatter",
-          stack: "Total",
-          label: {
-            show: true,
-            formatter: "{b}",
-          },
-          data: [
-            { value: -0.07, label: labelRight },
-            { value: -0.09, label: labelRight },
-            0.2,
-            0.44,
-            { value: -0.23, label: labelRight },
-            0.08,
-            { value: -0.17, label: labelRight },
-            0.47,
-            { value: -0.36, label: labelRight },
-            0.18,
-          ],
-        },
-      ],
-    },
-  },
-  data() {
-    return {
-      option: {
-        title: this.title ? this.titleTransform(this.title) : [],
-        tooltip: this.tooltip,
-        grid: this.grid,
-        legend: this.legend,
-        xAxis: this.xAxis,
-        yAxis: this.yAxis,
-        series: this.series,
-      },
-      charts: null,
-    };
+  name: "WebCesium2",
+  mounted() {
+    this.init();
   },
   methods: {
-    titleTransform({ text, subtext, ...others }) {
-      let arr = [];
-      let target = {};
-      if (text) {
-        target = {
-          text: "{style1|}{style2|}{style3|}" + text,
-          textStyle: {
-            fontWeight: "800",
-            color: "#333",
-            fontSize: 18,
-            rich: {
-              style1: {
-                height: 20,
-                width: 4,
-                backgroundColor: "#2d65f2",
-              },
-              style2: {
-                height: 20,
-                width: 4,
-                backgroundColor: "#b2c2ff",
-              },
-              style3: {
-                width: 10,
-              },
-            },
+    init() {
+      let osm = new Cesium.UrlTemplateImageryProvider({
+        url: "http://mt1.google.cn/vt/lyrs=s&hl=zh-CN&x={x}&y={y}&z={z}&s=Gali",
+      });
+      let viewer = new Cesium.Viewer(this.$refs.cesiumContainer, {
+        imageryProvider: osm,
+        contextOptions: {
+          webgl: {
+            alpha: true,
           },
-          left: 0,
-          top: 0,
-          ...others,
-        };
-        arr.push(target);
+        },
+        selectionIndicator: false,
+        animation: false, //是否显示动画控件
+        baseLayerPicker: false, //是否显示图层选择控件
+        geocoder: false, //是否显示地名查找控件
+        timeline: false, //是否显示时间线控件
+        sceneModePicker: false, //是否显示投影方式控件
+        navigationHelpButton: false, //是否显示帮助信息控件
+        infoBox: false, //是否显示点击要素之后显示的信息
+        fullscreenButton: false,
+        shouldAnimate: true, //动画播放
+      });
+
+      //取消双击事件
+      //viewer.cesiumWidget.screenSpaceEventHandler.removeInputAction(Cesium.ScreenSpaceEventType.LEFT_DOUBLE_CLICK);
+      //设置homebutton的位置
+      Cesium.Camera.DEFAULT_VIEW_RECTANGLE = Cesium.Rectangle.fromDegrees(
+        116.15,
+        40.54,
+        116.25,
+        40.56
+      ); //Rectangle(west, south, east, north)
+      //设置初始位置
+      viewer.camera.setView({
+        destination: Cesium.Cartesian3.fromDegrees(116.2, 40.55, 3000000),
+      });
+
+      //开启深度检测
+      //viewer.scene.globe.depthTestAgainstTerrain = true;
+
+      let tileset = viewer.scene.primitives.add(
+        new Cesium.Cesium3DTileset({
+          url: this.$withBase("/Source/3DTiles/building/tileset.json"),
+        })
+      );
+
+      //创建平移矩阵方法
+      // let translation = Cesium.Cartesian3.fromArray([2000000, 2000000, 100000]);
+      // m = Cesium.Matrix4.fromTranslation(translation);
+      // tileset._modelMatrix = m;
+
+      //
+      let params = {
+        tx: 110.5, //模型中心X轴坐标（经度，单位：十进制度）
+        ty: 30, //模型中心Y轴坐标（纬度，单位：十进制度）
+        tz: 1120, //模型中心Z轴坐标（高程，单位：米）
+        rx: 60, //X轴（经度）方向旋转角度（单位：度）
+        ry: 30, //Y轴（纬度）方向旋转角度（单位：度）
+        rz: 0, //Z轴（高程）方向旋转角度（单位：度）
+      };
+      //平移、贴地、旋转模型
+      function update3dtilesMaxtrix(tileset) {
+        //旋转
+        var mx = Cesium.Matrix3.fromRotationX(Cesium.Math.toRadians(params.rx));
+        var my = Cesium.Matrix3.fromRotationY(Cesium.Math.toRadians(params.ry));
+        var mz = Cesium.Matrix3.fromRotationZ(Cesium.Math.toRadians(params.rz));
+        var rotationX = Cesium.Matrix4.fromRotationTranslation(mx);
+        var rotationY = Cesium.Matrix4.fromRotationTranslation(my);
+        var rotationZ = Cesium.Matrix4.fromRotationTranslation(mz);
+        //平移
+        var position = Cesium.Cartesian3.fromDegrees(
+          params.tx,
+          params.ty,
+          params.tz
+        );
+        var m = Cesium.Transforms.eastNorthUpToFixedFrame(position);
+        //旋转、平移矩阵相乘
+        Cesium.Matrix4.multiply(m, rotationX, m);
+        Cesium.Matrix4.multiply(m, rotationY, m);
+        Cesium.Matrix4.multiply(m, rotationZ, m);
+        //赋值给tileset
+        tileset._root.transform = m;
       }
-      if (subtext) {
-        target = {
-          subtext: "{style1|}" + subtext,
-          subtextStyle: {
-            align: "right",
-            verticalAlign: "top",
-            color: "#666",
-            fontSize: "18",
-            rich: {
-              style1: {},
-            },
-          },
-          right: 0,
-          top: -10,
-          ...others,
-        };
-      }
-      arr.push(target);
-      return arr;
-    },
-  },
-  mounted() {
-    this.charts = this.$echarts.init(this.$refs.effectScatter);
-    if (!this.config) {
-      this.charts.setOption(this.option);
-    }
-  },
-  watch: {
-    data: {
-      handler(val) {
-        let { title, ...option } = this.config(val);
-        this.charts.setOption({
-          title: title ? this.titleTransform(title) : [],
-          ...option,
+
+      viewer.scene.primitives.add(tileset);
+
+      tileset.readyPromise
+        .then(function (tileset) {
+          viewer.scene.primitives.add(tileset);
+          viewer.zoomTo(
+            tileset,
+            new Cesium.HeadingPitchRange(
+              0.5,
+              -0.2,
+              tileset.boundingSphere.radius * 1.0
+            )
+          );
+          //平移、贴地、旋转模型
+          update3dtilesMaxtrix(tileset);
+        })
+        .otherwise(function (error) {
+          console.log(error);
         });
-      },
-      deep: true,
     },
   },
 };
