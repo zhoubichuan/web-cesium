@@ -10,7 +10,7 @@ import treemap from "./treemap";
 import bar from "./bar";
 import boxplot from "./boxplot";
 import sunburst from "./sunburst";
-import graph from "./graph";
+import createOpenStreetMapImageryProvider from "./createOpenStreetMapImageryProvider";
 import line from "./line";
 import pie from "./pie";
 import pie3d from "./pie3d";
@@ -32,7 +32,7 @@ let components = {
   // boxplot,
   // bar,
   // sunburst,
-  // graph,
+  createOpenStreetMapImageryProvider,
   // line,
   // pie,
   // pie3d,
