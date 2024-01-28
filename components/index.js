@@ -1,5 +1,5 @@
 import custom from "./custom";
-import effectScatter from "./effectScatter";
+import UrlTemplateImageryProvider from "./UrlTemplateImageryProvider";
 import gauge from "./gauge";
 import heatmap from "./heatmap";
 import parallel from "./parallel";
@@ -21,8 +21,8 @@ import map from './map'
 import candlestick from './candlestick'
 let components = {
   custom,
-  effectScatter,
-  gauge,
+  UrlTemplateImageryProvider,
+  // gauge,
   // heatmap,
   // parallel,
   // pictorialBar,

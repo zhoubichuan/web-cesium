@@ -1,10 +1,10 @@
 {
-  "name": "web-openlayers",
+  "name": "web-cesium",
   "version": "1.0.0",
-  "description": "web-openlayers",
+  "description": "web-cesium",
   "main": "index.js",
   "author": "zhoubichaun@icloud.com",
-  "hommepage": "https://github.com/zhoubichuan/web-openlayers",
+  "hommepage": "https://github.com/zhoubichuan/web-cesium",
   "license": "MIT",
   "type":"module",
   "scripts": {

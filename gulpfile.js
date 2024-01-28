@@ -99,7 +99,7 @@ gulp.task('default', gulp.series(
   // 'task3-css',
   'task4-js',
   // 'task5-image',
-  'task6-scss',
+  // 'task6-scss',
   'task7-copy',
   // 'task8-fixer'
 )
