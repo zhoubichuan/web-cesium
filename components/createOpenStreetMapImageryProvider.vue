@@ -1,7 +1,7 @@
 <template>
-  <div>
-    <div class="map" ref="cesiumContainer"></div>
-    <slot/>
+  <div class="map">
+    <div ref="cesiumContainer"></div>
+    <slot />
   </div>
 </template>
 
@@ -16,7 +16,7 @@ export default {
   methods: {
     init() {
       this.$emit("cesiumBeforeCreate");
-      let osm = Cesium.createOpenStreetMapImageryProvider({
+      let osm = new Cesium.createOpenStreetMapImageryProvider({
         url: "https://a.tile.openstreetmap.org/",
       });
       this.$emit("cesiumCreated", osm);
