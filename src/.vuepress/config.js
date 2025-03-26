@@ -13,6 +13,8 @@ module.exports = {
     ['script', { src: '/Source/JSON/building.js' }],
     ['script', { src: '/plugin/turf.min.js' }],
     ['script', { src: '/plugin/PrimitivePoints.js' }],
+    ['script', { src: '/plugin/PrimitiveTriangles.js' }],
+    ['script', { src: '/plugin/RadarPrimitive.js' }],
     ['script', { src: '/plugin/TerrainToolCopy.js' }],
     ["script", { src: "/dll/vendor.dll.js" }]
   ],
