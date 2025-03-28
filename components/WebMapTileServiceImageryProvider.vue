@@ -35,7 +35,7 @@ export default {
     methods: {
         init() {
             this.$emit("cesiumBeforeCreate");
-            let osm = new Cesium.webMapTileServiceImageryProvider(maps[this.basemap]);
+            let osm = new Cesium.webMapTileServiceImageryProvider(maps[this.config.basemap]);
             this.$emit("cesiumCreated", osm);
             let viewer = new Cesium.Viewer(this.$refs.cesiumContainer, {
                 imageryProvider: osm,

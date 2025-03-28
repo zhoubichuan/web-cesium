@@ -8,7 +8,12 @@
 <script>
 export default {
   name: "urlTemplateImageryProvider",
-
+  props: {
+    config: {
+      type: Object,
+      default: () => ({ basemap: 'vector', fromDegrees: [110.2, 34.55, 3000000] }),
+    },
+  },
   mounted() {
     this.init();
   },
@@ -54,7 +59,7 @@ export default {
         }
       }
       this.$emit("cesiumBeforeCreate");
-      let osm = new Cesium.UrlTemplateImageryProvider(maps.vector);
+      let osm = new Cesium.UrlTemplateImageryProvider(maps[this.config.basemap]);
       this.$emit("cesiumCreated", osm);
       let viewer = new Cesium.Viewer(this.$refs.cesiumContainer, {
         imageryProvider: osm,
@@ -92,20 +97,40 @@ export default {
       //   Cesium.ScreenSpaceEventType.LEFT_DOUBLE_CLICK
       // );
       //设置homebutton的位置
-      Cesium.Camera.DEFAULT_VIEW_RECTANGLE = Cesium.Rectangle.fromDegrees(
+      Cesium.Camera.DEFAULT_VIEW_RECTANGLE =new Cesium.Rectangle.fromDegrees(
         110.15,
         34.54,
         110.25,
         34.56
       ); //Rectangle(west, south, east, north)
       //设置初始位置
-      viewer.camera.setView({
-        destination: Cesium.Cartesian3.fromDegrees(110.2, 34.55, 3000000),
-      });
+
+      // 设置目标位置的经纬度和高度
+      var destination = new Cesium.Cartesian3.fromDegrees(...this.config.fromDegrees);
 
       //开启深度检测
       viewer.scene.globe.depthTestAgainstTerrain = true;
-      this.$emit("cesiumMounted", viewer);
+
+      var orientation = {
+        heading: Cesium.Math.toRadians(0), // 水平方向的旋转角度
+        pitch: Cesium.Math.toRadians(-90), // 俯仰角度
+        roll: 0 // 翻滚角度
+      };
+      //摄像机飞入操作，设置目标点和相机角度，以及整个过程的动画时长，Cesium会根据整个动画时长来设置飞入动画的整个事件进度
+      // viewer.camera.setView({
+      //   destination,
+      // });
+
+      viewer.camera.flyTo({
+        destination: destination,
+        orientation: orientation,
+        duration: 5, // 过渡动画的持续时间(秒)
+        //飞完之后设置相机的角度
+        complete: () => {
+          this.$emit("cesiumMounted", viewer);
+        },
+      })
+
     },
   },
 };
