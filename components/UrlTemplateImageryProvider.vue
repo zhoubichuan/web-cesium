@@ -6,6 +6,45 @@
 </template>
 
 <script>
+const maps = {
+  // 天地图矢量图
+  vector: {
+    url: 'http://{s}.tianditu.com/DataServer?T=vec_w&X={x}&Y={y}&L={z}&tk=816517e17d1cc31c6eec03ef9fc4bb5b',
+    subdomains: ['t0', 't1', 't2', 't3', 't4', 't5', 't6', 't7'],
+    maximumLevel: 18,
+    minimumLevel: 1,
+    credit: 'Tianditu'
+  },
+  osm: {
+    url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+    subdomains: ['a', 'b', 'c'], // 子域名列表
+    tilingScheme: new Cesium.WebMercatorTilingScheme(),
+    minimumLevel: 0,
+    maximumLevel: 18,
+    credit: '© OpenStreetMap contributors'
+  },
+  voyager: {
+    url: 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
+    subdomains: ['a', 'b', 'c', 'd'],
+    tilingScheme: new Cesium.WebMercatorTilingScheme(),
+    maximumLevel: 19,
+    credit: '© CartoDB © OpenStreetMap'
+  },
+  // 谷歌地图
+  google: {
+    url: 'https://mt1.google.com/vt/lyrs=m&x={x}&y={y}&z={z}',
+    tilingScheme: new Cesium.WebMercatorTilingScheme(),
+    maximumLevel: 19,
+    credit: '© Google'
+  },
+  // 卫星图
+  satellite: {
+    url: 'https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}',
+    tilingScheme: new Cesium.WebMercatorTilingScheme(),
+    maximumLevel: 19,
+    credit: '© Google'
+  }
+}
 export default {
   name: "urlTemplateImageryProvider",
 
@@ -16,9 +55,7 @@ export default {
   methods: {
     init() {
       this.$emit("cesiumBeforeCreate");
-      let osm = new Cesium.UrlTemplateImageryProvider({
-        url: "http://mt1.google.cn/vt/lyrs=s&hl=zh-CN&x={x}&y={y}&z={z}&s=Gali",
-      });
+      let osm = new Cesium.UrlTemplateImageryProvider(maps.vector);
       this.$emit("cesiumCreated", osm);
       let viewer = new Cesium.Viewer(this.$refs.cesiumContainer, {
         imageryProvider: osm,

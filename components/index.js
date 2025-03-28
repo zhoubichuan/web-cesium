@@ -6,7 +6,7 @@ import parallel from "./parallel";
 import pictorialBar from "./pictorialBar";
 import radar from "./radar";
 import themeRiver from "./themeRiver";
-import treemap from "./treemap";
+import WebMapTileServiceImageryProvider from "./WebMapTileServiceImageryProvider";
 import bar from "./bar";
 import boxplot from "./boxplot";
 import sunburst from "./sunburst";
@@ -28,7 +28,7 @@ let components = {
   // pictorialBar,
   // radar,
   // themeRiver,
-  // treemap,
+  WebMapTileServiceImageryProvider,
   // boxplot,
   // bar,
   // sunburst,

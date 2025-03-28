@@ -17,7 +17,8 @@ export default {
     init() {
       this.$emit("cesiumBeforeCreate");
       let osm = new Cesium.createOpenStreetMapImageryProvider({
-        url: "https://a.tile.openstreetmap.org/",
+        url: "https://tile-a.openstreetmap.fr/hot",
+        fileExtension: "png"
       });
       this.$emit("cesiumCreated", osm);
       let viewer = new Cesium.Viewer(this.$refs.cesiumContainer, {
